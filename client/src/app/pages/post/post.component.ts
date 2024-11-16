@@ -1,33 +1,34 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from '@angular/common';
+import { PostService, Post } from './post.service'; // Adjust the import path as necessary
 
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [MatGridListModule, MatCardModule, CommonModule],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.css',
+  styleUrls: ['./post.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PostComponent {
-  data = [
-    {
-      title: "Joshua Paulo",
-      description: "Crazy Player"
-    },
-    {
-      title: "Second Item",
-      description: "This is the description for the second item."
-    },
-    {
-      title: "Third Item",
-      description: "This is the description for the third item."
-    },
-    {
-      title: "Fourth Item",
-      description: "This is the description for the fourth item."
-    },
-  ];
+export class PostComponent implements OnInit {
+  posts: Post[] = [];
+
+  constructor(private postService: PostService) { }
+
+  ngOnInit() {
+    this.fetchPosts();
+  }
+
+  fetchPosts() {
+    this.postService.getAllPosts().subscribe({
+      next: (data) => {
+        this.posts = data;
+      },
+      error: (error) => {
+        console.error('Error fetching posts:', error);
+      }
+    });
+  }
 }
