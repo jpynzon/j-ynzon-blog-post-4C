@@ -12,7 +12,7 @@ export interface Post {
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'http://localhost:3000/post'; // Your API endpoint
+  private apiUrl = 'http://localhost:3000/post';
 
   constructor(private http: HttpClient) { }
 

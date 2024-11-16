@@ -1,8 +1,9 @@
+// post.component.ts
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from '@angular/common';
-import { PostService, Post } from './post.service'; // Adjust the import path as necessary
+import { PostService, Post } from './post.service';
 
 @Component({
   selector: 'app-post',
@@ -10,7 +11,7 @@ import { PostService, Post } from './post.service'; // Adjust the import path as
   imports: [MatGridListModule, MatCardModule, CommonModule],
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class PostComponent implements OnInit {
   posts: Post[] = [];
